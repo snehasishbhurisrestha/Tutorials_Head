@@ -1,5 +1,8 @@
 <?php
     session_start();
+    if(!isset($_SESSION['admin_id'])){
+        header("location:login.php");
+    }
     include("admin_panel/inc/db.php");
     if(isset($_POST['save'])){
         $subject_name = $_POST['subjectname'];
