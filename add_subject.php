@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include("admin_panel/inc/db.php");
     if(isset($_POST['save'])){
         $subject_name = $_POST['subjectname'];
@@ -18,7 +19,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Blank</title>
+    <title>Add new subject</title>
 
     <!-- Custom fonts for this template-->
     <link href="admin_panel/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

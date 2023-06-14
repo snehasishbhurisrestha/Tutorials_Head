@@ -11,7 +11,7 @@
             $row = $res->fetch_assoc();
             $_SESSION['admin_name'] = $row['admin_name'];
             $_SESSION['admin_id'] = $row['admin_id'];
-            header("location: dashboard.php");
+            header("location: add_subject.php");
         }else{
             $err = "Invalid login";
         }
@@ -26,7 +26,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <title>Admin Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="admin_panel/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

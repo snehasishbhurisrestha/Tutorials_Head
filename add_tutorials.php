@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include("admin_panel/inc/db.php");
     if(isset($_POST['save'])){
         $tp = $_POST['tp'];
@@ -18,8 +19,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>SB Admin 2 - Blank</title>
+    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+    <title>Add Tutorials</title>
 
     <!-- Custom fonts for this template-->
     <link href="admin_panel/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -62,10 +63,14 @@
                             <input type="text" class="form-control" placeholder="Enter title" name="tp">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Enter description" name="des">
+                            <!-- <input type="text" class="form-control" placeholder="Enter description" name="des"> -->
+                            <textarea name="des"></textarea>
                         </div>
                         <input type="submit" name="save" class="btn btn-primary btn-block btn-fl mt-3" value="Submit"/>
                     </form>
+                    <script>
+                        CKEDITOR.replace( 'des' );
+                    </script>
                     </div>
 
                     <h1 class="h3 mb-4 mt-5 text-gray-800 text-center">Showing Tutorials<strong> by Subject</strong></h1>

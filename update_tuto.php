@@ -20,8 +20,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>SB Admin 2 - Blank</title>
+    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+    <title>Update</title>
 
     <!-- Custom fonts for this template-->
     <link href="admin_panel/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -76,10 +76,14 @@
                                 <input type="text" class="form-control" value="<?php echo $rows['tutorials_topic']; ?>" placeholder="Enter title" name="tp">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" value="<?php echo $rows['tutorials_description']; ?>" placeholder="Enter description" name="des">
+                                <!-- <input type="text" class="form-control" value="<?php //echo $rows['tutorials_description']; ?>" placeholder="Enter description" name="des"> -->
+                                <textarea name="des"><?php echo $rows['tutorials_description']; ?></textarea>
                             </div>
                             <input type="submit" name="save" class="btn btn-primary btn-block btn-fl mt-3" value="Submit"/>
                         </form>
+                        <script>
+                            CKEDITOR.replace( 'des' );
+                        </script>
                     </div>
                 </div>
                 <!-- /.container-fluid -->

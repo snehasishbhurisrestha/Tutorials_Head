@@ -1,17 +1,16 @@
 <?php
     include("admin_panel/inc/db.php");
     if(isset($_POST['search'])){
-        $d = $_POST['data'];
-        $q = "SELECT * FROM subject WHERE subject_name = '$d'";
+        $id = $_POST['data'];
+        $q = "SELECT * FROM subject WHERE subject_id = '$id'";
         $res = $conn->query($q);
         $sub = $res->fetch_assoc();
-        $id = $sub['subject_id'];
     }
 ?>
 <!doctype html>
 <html lang="en">
 <head>
-  	<title>Sidebar 04</title>
+  	<title>Tutorials Head</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -29,42 +28,30 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
+                    <a class="nav-link" href="#">About Us</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0" action="" method="post">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="data">
+                <?php 
+                    $q = "SELECT * FROM subject";
+                    $res = $conn->query($q);
+                ?>
+                <select name="data" id="" class="form-control mr-sm-2">
+                    <option value="">Search by subject name</option>
+                    <?php while($row = $res->fetch_assoc()){ ?>
+                        <option value="<?php echo $row['subject_id'] ?>"><?php echo $row['subject_name'] ?></option>
+                    <?php } ?>
+                </select>
                 <button class="btn btn-outline-light my-2 my-sm-0" type="submit" name="search">Search</button>
             </form>
         </div>
     </nav>
 
-    <?php
-            if(isset($_POST['d'])){
-                $d = $_POST['val'];
-                $q = "SELECT * FROM tutorials WHERE tutorials_id = '$d'";
-                $ressl = $conn->query($q);
-                $des = $ressl->fetch_assoc();
-            }
-    ?>
 	<div class="wrapper d-flex align-items-stretch">
+    <?php if(isset($sub)){?>
 		<nav id="sidebar">
 			<div class="custom-menu">
 				<button type="button" id="sidebarCollapse" class="btn btn-primary">
@@ -72,43 +59,51 @@
 	                <span class="sr-only">Toggle Menu</span>
 	            </button>
             </div>
-            <?php if(isset($sub)){?>
 	  		<h1><a href="#" class="logo"><?php echo $sub['subject_name']; ?></a></h1>
             <ul class="list-unstyled components mb-5">
                 <?php
-                    //if(isset($sub)){
                     $q = "SELECT * FROM tutorials WHERE subject_id = '$id'";
                     $ress = $conn->query($q);
                     while($tuto = $ress->fetch_assoc()){
                 ?>
                 <li class="active">
-                    <a href="#">
-                        <form action="" method="post">
-                            <input type="hidden" name="val" value="<?php echo $tuto['tutorials_id']; ?>"/>
-                            <input type="submit" value="<?php echo $tuto['tutorials_topic']; ?>" style="border: none;background: none;color: white;font-size: 20px;" name="d"/>
-                        </form>
-                    </a>
+                    <a href="#"><button style="border: none;background: none;color: white;font-size: 20px;" onclick="get_content('<?php echo $tuto['tutorials_id'] ?>');" ><?php echo $tuto['tutorials_topic']; ?></button></a>
                 </li>
-                <?php }//} ?>
+                <?php } ?>
             </ul>
-            <?php } ?>
+            <?php }else{
+                $k = "Go to the search bar and choose the subject you want to read and click on search";
+                ?>
+                <div style="font-size:50px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);"><?php echo $k; ?></div>
+                <?php
+            }
+            ?>
     	</nav>
 
         <!-- Page Content  -->
         
-        <div id="content" class="p-4 p-md-5 pt-5">
-        <?php
-            if(isset($des)){
-        ?>
-            <h2 class="mb-4"><?php echo $des['tutorials_topic']; ?></h2>
-            <p><?php echo $des['tutorials_description']; ?></p>
-            <?php } ?>
-        </div>
+        <div id="content" class="p-4 p-md-5 pt-5"></div>
 	</div>
-
+  
     <script src="home_panel/js/jquery.min.js"></script>
     <script src="home_panel/js/popper.js"></script>
     <script src="home_panel/js/bootstrap.min.js"></script>
     <script src="home_panel/js/main.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+        function get_content(cid){
+            // alert(cid)
+            $.ajax({
+                url:'contents.php?cid='+cid,
+                type:'GET',
+                data:{},
+                success:function(resp){
+                    // alert(resp)
+                    $("#content").html(resp)
+                }
+            })
+        }
+    </script>
 </body>
 </html>
