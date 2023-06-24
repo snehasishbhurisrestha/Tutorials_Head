@@ -11,7 +11,7 @@ TABLE 1 - admin {
 }
 
 
-TABLE 2 - SUBJECT {  
+TABLE 2 - subject {  
     CREATE TABLE subject(
         subject_id int(12) AUTO_INCREMENT,
         subject_name varchar(500), 
@@ -20,7 +20,7 @@ TABLE 2 - SUBJECT {
 }
 
 
-TABLE 3 - {  
+TABLE 3 - tutorials{  
     CREATE TABLE tutorials(
         tutorials_id int(12) AUTO_INCREMENT, 
         tutorials_topic varchar(500), 
