@@ -1,0 +1,31 @@
+Database Name = "tutorialshead"
+
+TABLE 1 - admin {  
+    CREATE TABLE admin(
+        admin_id int(11) AUTO_INCREMENT,
+        admin_name varchar(50), 
+        admin_email varchar(50),
+        admin_password varchar(50), 
+        PRIMARY KEY(admin_id)
+    );  
+}
+
+
+TABLE 2 - SUBJECT {  
+    CREATE TABLE subject(
+        subject_id int(12) AUTO_INCREMENT,
+        subject_name varchar(500), 
+        PRIMARY KEY(subject_id)
+    );  
+}
+
+
+TABLE 3 - {  
+    CREATE TABLE tutorials(
+        tutorials_id int(12) AUTO_INCREMENT, 
+        tutorials_topic varchar(500), 
+        tutorials_description text, 
+        subject_id int(100), 
+        PRIMARY KEY(tutorials_id)
+    );  
+}
